@@ -1,3 +1,4 @@
+import { withAuth0 } from '@auth0/auth0-react';
 import React, { Component } from 'react';
 import '../assets/Sidebar.css';
 import DonutLargeIcon from '@material-ui/icons/DonutLarge';
@@ -42,4 +43,4 @@ export class sidebar extends Component {
   }
 }
 
-export default sidebar;
+export default withAuth0(sidebar);
