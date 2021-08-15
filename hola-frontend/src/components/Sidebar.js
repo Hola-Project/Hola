@@ -1,23 +1,38 @@
 import React, { Component } from 'react';
 import '../assets/Sidebar.css';
-import { useContext } from 'react';
 import DonutLargeIcon from '@material-ui/icons/DonutLarge';
 import ChatIcon from '@material-ui/icons/Chat';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { Avatar, IconButton } from '@material-ui/core';
 import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
 import { useHistory } from 'react-router-dom';
-import { AuthContext } from '../context/AuthContext';
 import Sidebarchat from '../components/Sidebarchat';
+import axios from 'axios';
+import { useState, useEffect } from 'react';
 
 export default function Sidebar() {
   let history = useHistory();
   var retrievedObject = localStorage.getItem('testObject');
   let data_user = JSON.parse(retrievedObject);
-  console.log(data_user);
+  console.log(data_user._id);
   const handleLogout = (e) => {
     history.push('/login');
   };
+  const [convers, setconver] = useState([]);
+
+  useEffect(() => {
+    const getconvers = async () => {
+      try {
+        const res = await axios.get(
+          `http://localhost:8080/conv/${data_user._id}`
+        );
+        setconver(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getconvers();
+  }, [data_user._id]);
 
   return (
     <div className='Sidebar'>
@@ -44,9 +59,13 @@ export default function Sidebar() {
         </div>
       </div>
       <div className='Sidebar__chat'>
-        <Sidebarchat />
-        <Sidebarchat />
-        <Sidebarchat />
+        {convers.map((e) => {
+          return (
+            <div>
+              <Sidebarchat convers={e} currentUser={data_user} />
+            </div>
+          );
+        })}
       </div>
     </div>
   );
