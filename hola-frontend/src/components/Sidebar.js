@@ -1,3 +1,4 @@
+import { withAuth0 } from '@auth0/auth0-react';
 import React, { Component } from 'react';
 import '../assets/Sidebar.css';
 import { useContext } from 'react';
