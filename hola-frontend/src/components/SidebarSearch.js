@@ -21,21 +21,7 @@ export default function Sidebar() {
 
   return (
     <div className='Sidebar'>
-      <div className='Sidebar__header'>
-        <Avatar />
-        <div className='Sidebar__headerRight'>
-          <button onClick={handleLogout}>log out </button>
-          <IconButton>
-            <DonutLargeIcon />
-          </IconButton>
-          <IconButton>
-            <ChatIcon />
-          </IconButton>
-          <IconButton>
-            <MoreVertIcon />
-          </IconButton>
-        </div>
-      </div>
+      
       <div className='Sidebar__search'>
         <div className='Sidebar__searchContainer'>
           <SearchOutlinedIcon color='gray' />

@@ -1,6 +1,7 @@
 import { Avatar } from '@material-ui/core';
 import React, { Component } from 'react';
 import '../assets/Sidebarchat.css';
+
 export class Sidebarchat extends Component {
   render() {
     return (
