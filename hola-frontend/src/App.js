@@ -1,21 +1,60 @@
 import React from "react";
 import "./App.css";
-import Chat from "./components/Chat";
-import Sidebar from "./components/Sidebar";
-import Header from "./components/Header";
+import Home from "./messanger";
+import Login from "./components/auth/login";
+import Register from "./components/auth/Register";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "./context/AuthContext";
+
 
 function App() {
+  const { user } = useContext(AuthContext);
+  console.log(user);
   return (
-    <div className="app">
-      <div className="app__header">
-        <Header />
-      </div>
-      <div className="app__body">
-        <Sidebar />
-        <Chat />
-      </div>
-    </div>
+    <Router>
+      <Switch>
+        <Route exact path="/">
+          {user ? <Home /> : <Register />}
+        </Route>
+        <Route path="/login">{user ? <Redirect to="/" /> : <Login />}</Route>
+        <Route path="/register">
+          {user ? <Redirect to="/" /> : <Register />}
+        </Route>
+        
+       
+      </Switch>
+    </Router>
   );
 }
+
+// function App() {
+//   const { user } = useContext(AuthContext);
+//   return (
+//     <Router>
+//       <Switch>
+//         <Route exact path="/">
+//           {user ? <Home /> : <Register />}
+//         </Route>
+//         <Route path="/login">{user ? <Redirect to="/" /> : <Login />}</Route>
+//         <Route path="/register">
+//           {user ? <Redirect to="/" /> : <Register />}
+//         </Route>
+//         <Route path="/messenger">
+//           {!user ? <Redirect to="/" /> : <Messenger />}
+//         </Route>
+//         <Route path="/profile/:username">
+//           <Profile />
+//         </Route>
+//       </Switch>
+//     </Router>
+//   );
+// }
+
 
 export default App;
