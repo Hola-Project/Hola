@@ -1,17 +1,16 @@
-import React from "react";
-import "./App.css";
-import Home from "./messanger";
-import Login from "./components/auth/login";
-import Register from "./components/auth/Register";
+import React from 'react';
+import './App.css';
+import Home from './messanger';
+import Login from './components/auth/login';
+import Register from './components/auth/Register';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Redirect,
-} from "react-router-dom";
-import { useContext } from "react";
-import { AuthContext } from "./context/AuthContext";
-
+} from 'react-router-dom';
+import { useContext } from 'react';
+import { AuthContext } from './context/AuthContext';
 
 function App() {
   const { user } = useContext(AuthContext);
@@ -19,15 +18,18 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route exact path="/">
-          {user ? <Home /> : <Register />}
+        <Route exact path='/'>
+          <Register />
         </Route>
-        <Route path="/login">{user ? <Redirect to="/" /> : <Login />}</Route>
-        <Route path="/register">
-          {user ? <Redirect to="/" /> : <Register />}
+        <Route path='/login'>
+          <Login />
         </Route>
-        
-       
+        <Route path='/register'>
+          {user ? <Redirect to='/' /> : <Register />}
+        </Route>
+        <Route exact path='/messenger'>
+          <Home />
+        </Route>
       </Switch>
     </Router>
   );
@@ -55,6 +57,5 @@ function App() {
 //     </Router>
 //   );
 // }
-
 
 export default App;

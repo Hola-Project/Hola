@@ -1,11 +1,15 @@
-import axios from "axios";
+import axios from 'axios';
 
-export const loginCall = async (userCredential, dispatch) => {
-  dispatch({ type: "LOGIN_START" });
+export const loginCall = async (userCredential, history, data) => {
   try {
-    const res = await axios.post("/auth/login", userCredential);
-    dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
+    const res = await axios.post('http://localhost:8080/login', userCredential);
+    data = res.data;
+    localStorage.setItem('testObject', JSON.stringify(data));
+    console.log(res.data);
+    alert('Welcome');
+    history.push('/messenger');
   } catch (err) {
-    dispatch({ type: "LOGIN_FAILURE", payload: err });
+    console.log(err);
+    alert('wrong password');
   }
 };
