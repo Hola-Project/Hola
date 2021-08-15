@@ -1,7 +1,7 @@
 import { Avatar } from '@material-ui/core';
 import React, { Component } from 'react';
 import '../assets/Sidebarchat.css';
-import { withAuth0 } from '@auth0/auth0-react';
+
 export class Sidebarchat extends Component {
   render() {
     return (
@@ -16,4 +16,4 @@ export class Sidebarchat extends Component {
   }
 }
 
-export default withAuth0(Sidebarchat);
+export default Sidebarchat;

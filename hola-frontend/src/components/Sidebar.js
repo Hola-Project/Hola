@@ -1,4 +1,3 @@
-import { withAuth0 } from '@auth0/auth0-react';
 import React, { Component } from 'react';
 import '../assets/Sidebar.css';
 import { useContext } from 'react';
@@ -8,7 +7,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { Avatar, IconButton } from '@material-ui/core';
 import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
 import { useHistory } from 'react-router-dom';
-import { AuthContext } from '../context/AuthContext';
+
 import Sidebarchat from '../components/Sidebarchat';
 
 export default function Sidebar() {
