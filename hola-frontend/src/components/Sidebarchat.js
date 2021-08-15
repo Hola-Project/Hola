@@ -1,6 +1,7 @@
 import { Avatar } from '@material-ui/core';
 import React, { Component } from 'react';
 import '../assets/Sidebarchat.css';
+
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
@@ -28,6 +29,7 @@ export default function Sidebarchat({ convers, currentUser }) {
       <Avatar />
       <div className='Sidebarchat__info'>
         <h2>{user?.username}</h2>
+
       </div>
     </div>
   );

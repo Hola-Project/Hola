@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+
 import Home from './messanger';
 import Login from './components/auth/login';
 import Register from './components/auth/Register';
@@ -32,6 +33,7 @@ function App() {
         </Route>
       </Switch>
     </Router>
+
   );
 }
 
