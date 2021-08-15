@@ -8,9 +8,6 @@ import { useHistory } from 'react-router-dom';
 export default function Login() {
   const email = useRef();
   const password = useRef();
-  console.log(useContext(AuthContext));
-  let { isFetching, user } = useContext(AuthContext);
-  console.log(user);
   let history = useHistory();
   let data;
   const handleClick = (e) => {
@@ -30,9 +27,9 @@ export default function Login() {
     <div className='login'>
       <div className='loginWrapper'>
         <div className='loginLeft'>
-          <h3 className='loginLogo'>Lamasocial</h3>
+          <h3 className='loginLogo'>Hola</h3>
           <span className='loginDesc'>
-            Connect with friends and the world around you on Lamasocial.
+            Connect with friends and the world around you on Hola.
           </span>
         </div>
         <div className='loginRight'>
