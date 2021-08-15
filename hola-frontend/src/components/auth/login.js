@@ -1,9 +1,9 @@
 
-import { useContext, useRef } from 'react';
+import {useRef} from 'react';
 import './login.css';
 import { loginCall } from '../../apiCalls';
-import { AuthContext } from '../../context/AuthContext';
-import { CircularProgress } from '@material-ui/core';
+//import { AuthContext } from '../../context/AuthContext';
+//import { CircularProgress } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 
 export default function Login() {
