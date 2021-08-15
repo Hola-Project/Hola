@@ -87,7 +87,8 @@
 
 .Chat__footer > .MuiSvgIcon-root {
   padding: 10px;
-  color: gray;
+  color: rgb(5, 5, 5);
+  font-size: 50px;
 }
 
 ::-webkit-scrollbar {

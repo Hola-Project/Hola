@@ -47,25 +47,12 @@ export default function Login() {
               className='loginInput'
               ref={password}
             />
-            <button
-              className='loginButton'
-              type='submit'
-              disabled={isFetching}
-              onClick={handleClick}
-            >
-              {isFetching ? (
-                <CircularProgress color='white' size='20px' />
-              ) : (
-                'Log In'
-              )}
+            <button className='loginButton' type='submit' onClick={handleClick}>
+              Log In
             </button>
             <span className='loginForgot'>Forgot Password?</span>
             <button className='loginRegisterButton' onClick={gotoregister}>
-              {isFetching ? (
-                <CircularProgress color='white' size='20px' />
-              ) : (
-                'Create a New Account'
-              )}
+              Create a New Account
             </button>
           </form>
         </div>
