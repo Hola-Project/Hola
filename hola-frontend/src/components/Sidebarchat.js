@@ -7,10 +7,8 @@ import { useEffect, useState } from 'react';
 
 export default function Sidebarchat({ convers, currentUser }) {
   const [user, setUser] = useState(null);
-
   useEffect(() => {
     const friendId = convers.members.find((m) => m !== currentUser._id);
-    console.log(friendId);
     const getUser = async () => {
       try {
         const res = await axios(
@@ -21,8 +19,10 @@ export default function Sidebarchat({ convers, currentUser }) {
         console.log(err);
       }
     };
+    
     getUser();
   }, [currentUser, convers]);
+ 
 
   return (
     <div class='Sidebarchat'>

@@ -109,3 +109,11 @@
   background: rgba(255, 255, 255, 0.8);
   -webkit-box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.5);
 }
+
+.noConversationText {
+  position: absolute;
+  top: 40%;
+  font-size: 50px;
+  color: rgba(161, 152, 152, 0.623);
+  cursor: default;
+}
