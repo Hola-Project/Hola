@@ -51,6 +51,7 @@ export default function Sidebar() {
         <div className='Sidebarchat__info'>
         <h2>Deyaa</h2>
         
+        
       </div>
       </div>
 
