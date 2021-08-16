@@ -50,6 +50,7 @@ export default function Sidebar() {
         <Avatar />
         <div className='Sidebarchat__info'>
         <h2>Deyaa</h2>
+        
       </div>
       </div>
 
