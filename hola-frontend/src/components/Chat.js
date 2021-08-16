@@ -30,7 +30,7 @@ export class Chat extends Component {
         </div>
         <div className='Chat__body'>
           <p className='Chat__message'>
-            <span className='Chat__name'>Kafaween</span>
+            <span className='Chat__name'>Qusai</span>
             this is a message
             <span className='Chat__time'>{new Date().toUTCString()}</span>
           </p>
