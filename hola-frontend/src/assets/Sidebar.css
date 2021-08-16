@@ -2,7 +2,9 @@
   display: flex;
   flex-direction: column;
   flex: 0.35;
+  
 }
+
 .Sidebar__header {
   display: flex;
   justify-content: space-between;
@@ -50,4 +52,11 @@
   background-color: white;
   overflow: scroll;
   overflow-x: hidden; /* Hide horizontal scrollbar */
+}
+
+.test{
+  width:18%;
+}
+#test1{
+  width: 50%;
 }
