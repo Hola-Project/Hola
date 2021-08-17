@@ -1,4 +1,4 @@
-import { Avatar } from '@material-ui/core';
+import Avatar  from 'react-avatar';
 import React, { Component } from 'react';
 import '../assets/Sidebarchat.css';
 
@@ -23,10 +23,11 @@ export default function Sidebarchat({ convers, currentUser }) {
 
     getUser();
   }, [currentUser, convers]);
-
+ const url = "http://localhost:8080/"+user?.img
   return (
     <div class='Sidebarchat'>
-      <Avatar />
+      <Avatar src ={url} round="100%"  size="45px" name={user?.username}/>
+      
       <div className='Sidebarchat__info'>
         <h2>{user?.username}</h2>
       </div>

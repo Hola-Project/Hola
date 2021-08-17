@@ -17,6 +17,7 @@ import MicIcon from '@material-ui/icons/Mic';
 import { useState, useEffect, useRef } from 'react';
 import { io } from 'socket.io-client';
 import Sideright from './Sideright';
+import Picker from 'emoji-picker-react';
 
 export default function Sidebar() {
   const socket = useRef();
@@ -158,10 +159,9 @@ export default function Sidebar() {
         <>
           <div className='Chat'>
             <div className='Chat__header'>
-              <Avatar />
               <div className='Chat__headerinfo'>
-                <h3>persone</h3>
-                <p>Last seen at....</p>
+                <h3>Private Chat</h3>
+              
               </div>
               <div className='Chat__headerRight'>
                 <IconButton>

@@ -8,7 +8,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
 import { useHistory } from 'react-router-dom';
 import Sidebarchat from '../components/Sidebarchat';
-import Avatar from '../components/Avatar';
+import Avatar  from 'react-avatar';
 // import '../assets/Sidebarchat.css';
 import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
@@ -20,10 +20,11 @@ export default function Sideright({ currentId, setCurrentChat }) {
   useEffect(() => {
     const getFriends = async () => {
       const res = await axios.get('http://localhost:8080/friends');
-      setFriends(res.data);
-      console.log(friends);
-    };
 
+      setFriends(res.data);
+     
+    };
+ 
     getFriends();
   }, [currentId]);
 
@@ -40,13 +41,14 @@ export default function Sideright({ currentId, setCurrentChat }) {
     };
     try {
       const res = await axios.post(`http://localhost:8080/addcon`, mem);
-      console.log(res.data);
+      console.log("res",res);
+      console.log("res");
       setCurrentChat(res.data);
-      console.log(res.data);
     } catch (err) {
       console.log(err);
     }
   };
+ 
   return (
     <div className='test'>
       <div className='Sidebar'>
@@ -59,7 +61,7 @@ export default function Sideright({ currentId, setCurrentChat }) {
         <div id='scroll'>
           {friends.map((o) => (
             <div className='Sidebarchat' onClick={() => handleClick(o)}>
-              <Avatar />
+              <Avatar src ={"http://localhost:8080/"+o?.img} round="100%"  size="45px" name={o?.username}/>
               <div className='Sidebarchat__info'>
                 <h2>{o.username}</h2>
               </div>

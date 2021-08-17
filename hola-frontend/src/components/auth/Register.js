@@ -10,24 +10,33 @@ export default function Register() {
   const password = useRef();
   const passwordAgain = useRef();
   const img = useRef();
-
   let history = useHistory();
-
+  const formData = new FormData();
   const handleClick = async (e) => {
     e.preventDefault();
     console.log(e.target.img.files[0]);
     if (passwordAgain.current.value !== password.current.value) {
       passwordAgain.current.setCustomValidity("Passwords don't match!");
     } else {
-      console.log(username.current.value);
-      const user = {
-        username: username.current.value,
-        email: email.current.value,
-        password: password.current.value,
-        img: e.target.img.files[0],
-      };
+      formData.append('img',e.target.img.files[0]);
+      formData.append('username',username.current.value);
+      formData.append('email',email.current.value);
+      formData.append('password',password.current.value);
+     
+      console.log(formData);
+      // const user = {
+      //   username: username.current.value,
+      //   email: email.current.value,
+      //   password: password.current.value,
+      //   img: e.target.img.files[0]
+      // };
+
+      
+      
+
       try {
-        await axios.post('http://localhost:8080/register', user);
+       const data =  await axios.post('http://localhost:8080/register', formData);
+       console.log(data);
         history.push('/login');
       } catch (err) {
         console.log(err);
@@ -80,7 +89,7 @@ export default function Register() {
               type='password'
             />
 
-            <input ref={img} type='file' name='img' />
+            <input  type='file' name='img' id="img" />
 
             <button className='loginButton' type='submit'>
               Sign Up
