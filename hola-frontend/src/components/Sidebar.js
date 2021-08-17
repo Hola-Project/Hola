@@ -33,7 +33,7 @@ export default function Sidebar() {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
   const [arrivalMessage, setArrivalMessage] = useState(null);
-  const [onlineUsers, setOnlineUsers] = useState([]);
+  // const [onlineUsers, setOnlineUsers] = useState([]);
 
   useEffect(() => {
     socket.current = io('ws://localhost:9000');
@@ -206,11 +206,11 @@ export default function Sidebar() {
           Open a conversation to start a chat
         </span>
       )}
-      {/* <Sideright
-        onlineUsers={onlineUsers}
+      <Sideright
+        // onlineUsers={onlineUsers}
         currentId={data_user._id}
         setCurrentChat={setCurrentChat}
-      /> */}
+      />
     </>
   );
 }

@@ -1,0 +1,6 @@
+#scroll {
+  background-color: white;
+  overflow: scroll;
+  overflow-x: hidden;
+  height: 79vh;
+}

@@ -15,6 +15,7 @@ export default function Sidebarchat({ convers, currentUser }) {
           'http://localhost:8080/getUsers?userId=' + friendId
         );
         setUser(res.data);
+        console.log(res.data.username);
       } catch (err) {
         console.log(err);
       }
