@@ -13,7 +13,7 @@ export class Chat extends Component {
         <div className='Chat__header'>
           <Avatar />
           <div className='Chat__headerinfo'>
-            <h3>Room name</h3>
+            <h3> name</h3>
             <p>Last seen at....</p>
           </div>
           <div className='Chat__headerRight'>
