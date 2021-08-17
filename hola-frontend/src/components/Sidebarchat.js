@@ -19,17 +19,15 @@ export default function Sidebarchat({ convers, currentUser }) {
         console.log(err);
       }
     };
-    
+
     getUser();
   }, [currentUser, convers]);
- 
 
   return (
     <div class='Sidebarchat'>
       <Avatar />
       <div className='Sidebarchat__info'>
         <h2>{user?.username}</h2>
-
       </div>
     </div>
   );

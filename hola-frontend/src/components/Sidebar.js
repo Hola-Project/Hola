@@ -12,13 +12,14 @@ import { AttachFile, InsertEmoticon } from '@material-ui/icons';
 import MoreVert from '@material-ui/icons/MoreVert';
 import SearchOutlined from '@material-ui/icons/SearchOutlined';
 import '../assets/Chat.css';
-import Message from "./message"
+import Message from './message';
 import MicIcon from '@material-ui/icons/Mic';
-import { useState, useEffect,useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { io } from 'socket.io-client';
+import Sideright from './Sideright';
 
 export default function Sidebar() {
-
-
+  const socket = useRef();
   const scrollRef = useRef();
   let history = useHistory();
   var retrievedObject = localStorage.getItem('testObject');
@@ -26,11 +27,38 @@ export default function Sidebar() {
   const handleLogout = (e) => {
     history.push('/login');
   };
-  
+
   const [convers, setconver] = useState([]);
   const [currentChat, setCurrentChat] = useState(null);
   const [messages, setMessages] = useState([]);
-  const [newMessage, setNewMessage] = useState("");
+  const [newMessage, setNewMessage] = useState('');
+  const [arrivalMessage, setArrivalMessage] = useState(null);
+  const [onlineUsers, setOnlineUsers] = useState([]);
+
+  useEffect(() => {
+    socket.current = io('ws://localhost:9000');
+    socket.current.on('getMessage', (data) => {
+      setArrivalMessage({
+        sender: data.senderId,
+        text: data.text,
+        createdAt: Date.now(),
+      });
+    });
+  }, []);
+
+  useEffect(() => {
+    arrivalMessage &&
+      currentChat?.members.includes(arrivalMessage.sender) &&
+      setMessages((prev) => [...prev, arrivalMessage]);
+  }, [arrivalMessage, currentChat]);
+
+  useEffect(() => {
+    socket.current.emit('addUser', data_user._id);
+    socket.current.on('getUsers', (users) => {
+      // console.log(users);
+    });
+  }, [data_user]);
+
   useEffect(() => {
     const getconvers = async () => {
       try {
@@ -44,124 +72,145 @@ export default function Sidebar() {
     };
     getconvers();
   }, [data_user._id]);
-  console.log(currentChat);
+
   useEffect(() => {
     const getMessages = async () => {
       try {
-        const res = await axios.get("http://localhost:8080/message/" + currentChat?._id);
+        const res = await axios.get(
+          'http://localhost:8080/message/' + currentChat?._id
+        );
         setMessages(res.data);
       } catch (err) {
         console.log(err);
       }
     };
-  
+
     getMessages();
   }, [currentChat]);
- 
-  
 
-console.log(currentChat);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const message = {
+      sender: data_user._id,
+      text: newMessage,
+      conversationId: currentChat._id,
+    };
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  const message = {
-    sender: data_user._id,
-    text: newMessage,
-    conversationId: currentChat._id,
+    const receiverId = currentChat.members.find(
+      (member) => member !== data_user._id
+    );
+
+    socket.current.emit('sendMessage', {
+      senderId: data_user._id,
+      receiverId: receiverId,
+      text: newMessage,
+    });
+
+    try {
+      const res = await axios.post('http://localhost:8080/send', message);
+      setMessages([...messages, res.data]);
+      setNewMessage('');
+    } catch (err) {
+      console.log(err);
+    }
   };
 
-  try {
-    const res = await axios.post("http://localhost:8080/send", message);
-    setMessages([...messages, res.data]);
-    setNewMessage("");
-  } catch (err) {
-    console.log(err);
-  }
-};
-  
-
-useEffect(() => {
-  scrollRef.current?.scrollIntoView({ behavior: "smooth" });
-}, [messages]);
+  useEffect(() => {
+    scrollRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
   return (
     <>
-    <div className='Sidebar'>
-      <div className='Sidebar__header'>
-        <Avatar />
-        <div className='Sidebar__headerRight'>
-          <button onClick={handleLogout}>log out </button>
-          <IconButton>
-            <DonutLargeIcon />
-          </IconButton>
-          <IconButton>
-            <ChatIcon />
-          </IconButton>
-          <IconButton>
-            <MoreVertIcon />
-          </IconButton>
+      <div className='Sidebar'>
+        <div className='Sidebar__header'>
+          <Avatar />
+          <div className='Sidebar__headerRight'>
+            <button onClick={handleLogout}>log out </button>
+            <IconButton>
+              <DonutLargeIcon />
+            </IconButton>
+            <IconButton>
+              <ChatIcon />
+            </IconButton>
+            <IconButton>
+              <MoreVertIcon />
+            </IconButton>
+          </div>
         </div>
-      </div>
-      <div className='Sidebar__search'>
-        <div className='Sidebar__searchContainer'>
-          <SearchOutlinedIcon color='gray' />
+        <div className='Sidebar__search'>
+          <div className='Sidebar__searchContainer'>
+            <SearchOutlinedIcon color='gray' />
 
-          <input type='text' placeholder='Search or Start new chat' />
+            <input type='text' placeholder='Search or Start new chat' />
+          </div>
+        </div>
+        <div className='Sidebar__chat'>
+          {convers.map((e) => {
+            return (
+              <div onClick={() => setCurrentChat(e)}>
+                <Sidebarchat convers={e} currentUser={data_user} />
+              </div>
+            );
+          })}
         </div>
       </div>
-      <div className='Sidebar__chat'>
-        {convers.map((e) => {
-          return (
-            <div onClick={() =>  setCurrentChat(e) } >
-              <Sidebarchat convers={e} currentUser={data_user}  />
+
+      {currentChat ? (
+        <>
+          <div className='Chat'>
+            <div className='Chat__header'>
+              <Avatar />
+              <div className='Chat__headerinfo'>
+                <h3>persone</h3>
+                <p>Last seen at....</p>
+              </div>
+              <div className='Chat__headerRight'>
+                <IconButton>
+                  <SearchOutlined />
+                </IconButton>
+                <IconButton>
+                  <AttachFile />
+                </IconButton>
+                <IconButton>
+                  <MoreVert />
+                </IconButton>
+              </div>
             </div>
-          );
-        })}
-      </div>
-    </div>
-   
-    {currentChat ? 
-      <>
-    <div className='Chat'>
-      <div className='Chat__header'>
-        <Avatar />
-        <div className='Chat__headerinfo'>
-          <h3>persone</h3>
-          <p>Last seen at....</p>
-        </div>
-        <div className='Chat__headerRight'>
-          <IconButton>
-            <SearchOutlined />
-          </IconButton>
-          <IconButton>
-            <AttachFile />
-          </IconButton>
-          <IconButton>
-            <MoreVert />
-          </IconButton>
-        </div>
-      </div>
-      <div className='Chat__body'>
-        {messages.map((m) => (
-                  <div ref={scrollRef}>
-                    <Message message={m}  own={m.sender === data_user._id} />
-                  </div>
-                ))}
-      </div>
-      <div className='Chat__footer'>
-        <InsertEmoticon />
-        <form>
-          <input type='text'  className="chatMessageInput"
-                    placeholder="write something..."
-                    onChange={(e) => setNewMessage(e.target.value)}
-                    value={newMessage} />
-          <button type='submit' onClick={handleSubmit}>Send a message</button>
-        </form>
-        <MicIcon />
-      </div>
-    </div>
-    </> : <span class = "noConversationText"> Open  a conversation to start a chat</span>
-  }
- 
-  </>
+            <div className='Chat__body'>
+              {messages.map((m) => (
+                <div ref={scrollRef}>
+                  <Message message={m} own={m.sender === data_user._id} />
+                </div>
+              ))}
+            </div>
+            <div className='Chat__footer'>
+              <InsertEmoticon />
+              <form>
+                <input
+                  type='text'
+                  className='chatMessageInput'
+                  placeholder='write something...'
+                  onChange={(e) => setNewMessage(e.target.value)}
+                  value={newMessage}
+                />
+                <button type='submit' onClick={handleSubmit}>
+                  Send a message
+                </button>
+              </form>
+              <MicIcon />
+            </div>
+          </div>
+        </>
+      ) : (
+        <span class='noConversationText'>
+          {' '}
+          Open a conversation to start a chat
+        </span>
+      )}
+      {/* <Sideright
+        onlineUsers={onlineUsers}
+        currentId={data_user._id}
+        setCurrentChat={setCurrentChat}
+      /> */}
+    </>
   );
 }

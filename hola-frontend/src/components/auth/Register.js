@@ -21,11 +21,10 @@ export default function Register() {
     } else {
       console.log(username.current.value);
       const user = {
-        username: 'username.current.value',
+        username: username.current.value,
         email: email.current.value,
         password: password.current.value,
         img: e.target.img.files[0],
-
       };
       try {
         await axios.post('http://localhost:8080/register', user);
@@ -80,9 +79,9 @@ export default function Register() {
               className='loginInput'
               type='password'
             />
-             
-                            <input ref={img} type="file" name="img"/>
-                    
+
+            <input ref={img} type='file' name='img' />
+
             <button className='loginButton' type='submit'>
               Sign Up
             </button>
