@@ -173,6 +173,7 @@ export default function Sidebar() {
                 <IconButton>
                   <MoreVert />
                 </IconButton>
+                
               </div>
             </div>
             <div className='Chat__body'>
