@@ -15,7 +15,12 @@ import axios from 'axios';
 
 export default function Sideright({ currentId, setCurrentChat }) {
   const [friends, setFriends] = useState([]);
-  const [onlineFriends, setOnlineFriends] = useState([]);
+  const [searchField, setSearchField] = useState("");
+
+
+
+
+
 
   useEffect(() => {
     const getFriends = async () => {
@@ -48,25 +53,62 @@ export default function Sideright({ currentId, setCurrentChat }) {
       console.log(err);
     }
   };
+
+  const filterUser =  friends.filter( user =>{
+    return (
+      user
+      .username
+      .toLowerCase()
+      .includes(searchField.toLowerCase()) ||
+      user
+      .email
+      .toLowerCase()
+      .includes(searchField.toLowerCase())
+    );
+  })
+
+  // const searchUser =  (event) => {
+  // event.preventDefault()
+  // console.log(event.target.value);
+  // let value = event.target.value
+  // friends.filter(user => {
+  //   return  user ===value;
+  // });
+
+  // }
+
  
+  const handleChange = e => {
+    setSearchField(e.target.value);
+  };
+ 
+  const  searchList = () => {
+    return (
+<>
+      {filterUser.map((o) => (
+        <div className='Sidebarchat' onClick={() => handleClick(o)}>
+          <Avatar src ={"http://localhost:8080/"+o?.img} round="100%"  size="45px" name={o?.username}/>
+          <div className='Sidebarchat__info'>
+            <h2>{o.username}</h2>
+          </div>
+        </div>
+      ))}
+      </>
+     
+    );
+  }
+
   return (
     <div className='test'>
       <div className='Sidebar'>
         <div className='Sidebar__search'>
           <div className='Sidebar__searchContainer'>
-            <SearchOutlinedIcon color='gray' />
-            <input type='text' placeholder='Search ' id='test1' />
+            <SearchOutlinedIcon color='gray'  />
+            <input type='text' placeholder='Search' name="search" id='test1'  onChange={handleChange} />
           </div>
         </div>
         <div id='scroll'>
-          {friends.map((o) => (
-            <div className='Sidebarchat' onClick={() => handleClick(o)}>
-              <Avatar src ={"http://localhost:8080/"+o?.img} round="100%"  size="45px" name={o?.username}/>
-              <div className='Sidebarchat__info'>
-                <h2>{o.username}</h2>
-              </div>
-            </div>
-          ))}
+        {searchList()}
         </div>
       </div>
     </div>
