@@ -11,15 +11,12 @@ function message() {
   return (
     <>
       <video src={vedio} autoPlay loop muted />
-      <Container fluid>
-        <Row>
-          <div className='app'>
-            <div className='app__body'>
-              <Sidebar />
-            </div>
-          </div>
-        </Row>
-      </Container>
+
+      <div className='app'>
+        <div className='app__body'>
+          <Sidebar />
+        </div>
+      </div>
     </>
   );
 }

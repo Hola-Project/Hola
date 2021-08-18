@@ -135,133 +135,129 @@ export default function Sidebar() {
   };
   return (
     <>
-      <Container fluid>
-        <Row>
-          <div className='Sidebar'>
-            <div className='Sidebar__header'>
-              <Avatar />
-              <div className='Sidebar__headerRight'>
-                <button onClick={handleLogout}>log out </button>
-                <IconButton>
-                  <DonutLargeIcon />
-                </IconButton>
-                <IconButton>
-                  <ChatIcon />
-                </IconButton>
-                <IconButton>
-                  <MoreVertIcon />
-                </IconButton>
-              </div>
-            </div>
-            <div className='Sidebar__search'>
-              <div className='Sidebar__searchContainer'>
-                <SearchOutlinedIcon color='gray' />
+      <div className='Sidebar'>
+        <div className='Sidebar__header'>
+          <Avatar />
+          <div className='Sidebar__headerRight'>
+            <button onClick={handleLogout}>log out </button>
+            <IconButton>
+              <DonutLargeIcon />
+            </IconButton>
+            <IconButton>
+              <ChatIcon />
+            </IconButton>
+            <IconButton>
+              <MoreVertIcon />
+            </IconButton>
+          </div>
+        </div>
+        <div className='Sidebar__search'>
+          <div className='Sidebar__searchContainer'>
+            <SearchOutlinedIcon color='gray' />
 
-                <input type='text' placeholder='Search or Start new chat' />
+            <input type='text' placeholder='Search or Start new chat' />
+          </div>
+        </div>
+        <div className='Sidebar__chat'>
+          {convers.map((e) => {
+            console.log(e._id);
+            return (
+              <div
+                onClick={() => {
+                  setCurrentChat(e);
+                  updateStatus(e);
+                }}
+              >
+                <Sidebarchat convers={e} currentUser={data_user} />
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {currentChat ? (
+        <>
+          <div className='Chat'>
+            <div className='Chat__header'>
+              <div className='Chat__headerinfo'>
+                <h3>Private Chat</h3>
+              </div>
+              <div className='Chat__headerRight'>
+                <IconButton>
+                  <SearchOutlined />
+                </IconButton>
+                <IconButton>
+                  <AttachFile />
+                </IconButton>
+                <IconButton>
+                  <MoreVert />
+                </IconButton>
               </div>
             </div>
-            <div className='Sidebar__chat'>
-              {convers.map((e) => {
-                console.log(e._id);
-                return (
-                  <div
-                    onClick={() => {
-                      setCurrentChat(e);
-                      updateStatus(e);
-                    }}
-                  >
-                    <Sidebarchat convers={e} currentUser={data_user} />
-                  </div>
-                );
-              })}
+            <div className='Chat__body'>
+              {messages.map((m) => (
+                <div ref={scrollRef}>
+                  <Message message={m} own={m.sender === data_user._id} />
+                </div>
+              ))}
+            </div>
+            <div className='Chat__footer'>
+              <InsertEmoticon />
+              <form>
+                <input
+                  type='text'
+                  className='chatMessageInput'
+                  placeholder='write something...'
+                  onChange={(e) => setNewMessage(e.target.value)}
+                  value={newMessage}
+                />
+                <button type='submit' onClick={handleSubmit}>
+                  Send a message
+                </button>
+              </form>
+              <MicIcon />
             </div>
           </div>
-
-          {currentChat ? (
-            <>
-              <div className='Chat'>
-                <div className='Chat__header'>
-                  <div className='Chat__headerinfo'>
-                    <h3>Private Chat</h3>
-                  </div>
-                  <div className='Chat__headerRight'>
-                    <IconButton>
-                      <SearchOutlined />
-                    </IconButton>
-                    <IconButton>
-                      <AttachFile />
-                    </IconButton>
-                    <IconButton>
-                      <MoreVert />
-                    </IconButton>
-                  </div>
-                </div>
-                <div className='Chat__body'>
-                  {messages.map((m) => (
-                    <div ref={scrollRef}>
-                      <Message message={m} own={m.sender === data_user._id} />
-                    </div>
-                  ))}
-                </div>
-                <div className='Chat__footer'>
-                  <InsertEmoticon />
-                  <form>
-                    <input
-                      type='text'
-                      className='chatMessageInput'
-                      placeholder='write something...'
-                      onChange={(e) => setNewMessage(e.target.value)}
-                      value={newMessage}
-                    />
-                    <button type='submit' onClick={handleSubmit}>
-                      Send a message
-                    </button>
-                  </form>
-                  <MicIcon />
-                </div>
-              </div>
-            </>
-          ) : (
-            <div className='Chat'>
-              <div className='Chat__header'>
-                <div className='Chat__headerinfo'>
-                  <h3>Private Chat</h3>
-                </div>
-                <div className='Chat__headerRight'>
-                  <IconButton>
-                    <SearchOutlined />
-                  </IconButton>
-                  <IconButton>
-                    <AttachFile />
-                  </IconButton>
-                  <IconButton>
-                    <MoreVert />
-                  </IconButton>
-                </div>
-              </div>
-              <div className='Chat__body'>
-                <h3>Click on chat</h3>
-              </div>
-              <div className='Chat__footer'>
-                <InsertEmoticon />
-                <form>
-                  <input
-                    type='text'
-                    className='chatMessageInput'
-                    placeholder='write something...'
-                  />
-                </form>
-                <MicIcon />
-              </div>
+        </>
+      ) : (
+        <div className='Chat'>
+          <div className='Chat__header'>
+            <div className='Chat__headerinfo'>
+              <h3>Private Chat</h3>
             </div>
-          )}
-          <Sideright
-            // onlineUsers={onlineUsers}
-            currentId={data_user._id}
-            setCurrentChat={setCurrentChat}
-          />
-        </Row>
-      </Container>
+            <div className='Chat__headerRight'>
+              <IconButton>
+                <SearchOutlined />
+              </IconButton>
+              <IconButton>
+                <AttachFile />
+              </IconButton>
+              <IconButton>
+                <MoreVert />
+              </IconButton>
+            </div>
+          </div>
+          <div className='Chat__body'>
+            <h3>Click on chat</h3>
+          </div>
+          <div className='Chat__footer'>
+            <InsertEmoticon />
+            <form>
+              <input
+                type='text'
+                className='chatMessageInput'
+                placeholder='write something...'
+              />
+            </form>
+            <MicIcon />
+          </div>
+        </div>
+      )}
+      <Sideright
+        // onlineUsers={onlineUsers}
+        currentId={data_user._id}
+        setCurrentChat={setCurrentChat}
+      />
     </>
   );
 }
