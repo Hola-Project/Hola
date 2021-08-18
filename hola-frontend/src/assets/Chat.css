@@ -25,6 +25,7 @@
 }
 
 .Chat__body {
+  position: relative;
   flex: 1;
   background-image: url(https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png);
 
@@ -34,6 +35,12 @@
   overflow: scroll;
 
   overflow-x: hidden; /* Hide horizontal scrollbar */
+}
+
+.Chat__body > h3 {
+  font-weight: bold;
+  text-align: center;
+  margin-top: 30%;
 }
 
 .Chat__message {

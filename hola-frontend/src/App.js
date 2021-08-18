@@ -12,6 +12,7 @@ import {
 } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from './context/AuthContext';
+import HeroSection from './components/HeroSection';
 
 function App() {
   const { user } = useContext(AuthContext);
@@ -19,7 +20,7 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route exact path='/'>
+        <Route exact path='/register'>
           <Register />
         </Route>
         <Route path='/login'>
@@ -31,9 +32,9 @@ function App() {
         <Route exact path='/messenger'>
           <Home />
         </Route>
+        <Route path='/' exact component={HeroSection} />
       </Switch>
     </Router>
-
   );
 }
 

@@ -1,9 +1,7 @@
-
 import { useContext, useRef } from 'react';
 import './login.css';
 import { loginCall } from '../../apiCalls';
-import { AuthContext } from '../../context/AuthContext';
-import { CircularProgress } from '@material-ui/core';
+
 import { useHistory } from 'react-router-dom';
 
 export default function Login() {
@@ -21,7 +19,7 @@ export default function Login() {
     console.log(data);
   };
   const gotoregister = (e) => {
-    history.push('/');
+    history.push('/register');
   };
 
   return (
@@ -55,11 +53,9 @@ export default function Login() {
             <button className='loginRegisterButton' onClick={gotoregister}>
               Create a New Account
             </button>
-            
           </form>
         </div>
       </div>
     </div>
   );
 }
-
