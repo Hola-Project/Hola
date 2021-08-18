@@ -7,6 +7,25 @@ import { useEffect, useState } from 'react';
 
 export default function Sidebarchat({ convers, currentUser }) {
   const [user, setUser] = useState(null);
+  const [status,setstatus]=useState([])
+
+
+  useEffect(()=>{
+    const getstatus=async()=>{
+      try{
+        const res_status=await axios("http://localhost:8080/getUnReadMessage/"+convers._id)
+        setstatus(res_status.data)
+        console.log(res_status.data);
+        
+      }
+      catch (err) {
+        console.log(err);
+      }
+    }
+    getstatus()
+     
+  }, [])
+  
   useEffect(() => {
     const friendId = convers.members.find((m) => m !== currentUser._id);
     const getUser = async () => {
@@ -15,7 +34,7 @@ export default function Sidebarchat({ convers, currentUser }) {
           'http://localhost:8080/getUsers?userId=' + friendId
         );
         setUser(res.data);
-        console.log(res.data.username);
+        console.log(convers);
       } catch (err) {
         console.log(err);
       }
@@ -23,14 +42,21 @@ export default function Sidebarchat({ convers, currentUser }) {
 
     getUser();
   }, [currentUser, convers]);
+  
  const url = "http://localhost:8080/"+user?.img
   return (
     <div class='Sidebarchat'>
       <Avatar src ={url} round="100%"  size="45px" name={user?.username}/>
-      
       <div className='Sidebarchat__info'>
         <h2>{user?.username}</h2>
       </div>
+      {
+   
+      status[0]?.seen == false && 
+      <span class="badge">{status.length}</span>
+     
+      
+      }
     </div>
   );
 }

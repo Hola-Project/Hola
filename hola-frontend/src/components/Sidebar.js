@@ -100,6 +100,7 @@ export default function Sidebar() {
     const receiverId = currentChat.members.find(
       (member) => member !== data_user._id
     );
+   
 
     socket.current.emit('sendMessage', {
       senderId: data_user._id,
@@ -119,6 +120,19 @@ export default function Sidebar() {
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
+
+  const updateStatus =  async (e) => {
+    try {
+
+      const res = await axios.put(
+        'http://localhost:8080/updateStatus/' + e?._id
+      );
+      console.log(res);
+      
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <>
       <div className='Sidebar'>
@@ -146,9 +160,12 @@ export default function Sidebar() {
         </div>
         <div className='Sidebar__chat'>
           {convers.map((e) => {
+           console.log(e._id);
             return (
-              <div onClick={() => setCurrentChat(e)}>
-                <Sidebarchat convers={e} currentUser={data_user} />
+              <div onClick={() =>{
+              setCurrentChat(e) 
+              updateStatus(e)} }>
+                <Sidebarchat convers={e} currentUser={data_user}  />
               </div>
             );
           })}
