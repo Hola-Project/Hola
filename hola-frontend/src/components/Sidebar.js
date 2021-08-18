@@ -3,7 +3,8 @@ import '../assets/Sidebar.css';
 import DonutLargeIcon from '@material-ui/icons/DonutLarge';
 import ChatIcon from '@material-ui/icons/Chat';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import { Avatar, IconButton } from '@material-ui/core';
+import { IconButton } from '@material-ui/core';
+import Avatar from 'react-avatar';
 import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
 import { useHistory } from 'react-router-dom';
 import Sidebarchat from '../components/Sidebarchat';
@@ -137,7 +138,12 @@ export default function Sidebar() {
     <>
       <div className='Sidebar'>
         <div className='Sidebar__header'>
-          <Avatar />
+          <Avatar
+            src={'http://localhost:8080/' + data_user.img}
+            round='100%'
+            size='45px'
+            name={data_user.username}
+          />
           <div className='Sidebar__headerRight'>
             <button onClick={handleLogout}>log out </button>
             <IconButton>
@@ -241,7 +247,7 @@ export default function Sidebar() {
             <h3>Click on chat</h3>
           </div>
           <div className='Chat__footer'>
-            <InsertEmoticon />
+            {/* <InsertEmoticon />
             <form>
               <input
                 type='text'
@@ -249,7 +255,7 @@ export default function Sidebar() {
                 placeholder='write something...'
               />
             </form>
-            <MicIcon />
+            <MicIcon /> */}
           </div>
         </div>
       )}
