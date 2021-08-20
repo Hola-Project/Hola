@@ -146,14 +146,9 @@ export default function Sidebar() {
           />
           <div className='Sidebar__headerRight'>
             <button onClick={handleLogout}>log out </button>
-            <IconButton>
-              <DonutLargeIcon />
-            </IconButton>
+
             <IconButton>
               <ChatIcon />
-            </IconButton>
-            <IconButton>
-              <MoreVertIcon />
             </IconButton>
           </div>
         </div>
@@ -189,12 +184,6 @@ export default function Sidebar() {
                 <h3>Private Chat</h3>
               </div>
               <div className='Chat__headerRight'>
-                <IconButton>
-                  <SearchOutlined />
-                </IconButton>
-                <IconButton>
-                  <AttachFile />
-                </IconButton>
                 <IconButton>
                   <MoreVert />
                 </IconButton>
@@ -232,12 +221,6 @@ export default function Sidebar() {
               <h3>Private Chat</h3>
             </div>
             <div className='Chat__headerRight'>
-              <IconButton>
-                <SearchOutlined />
-              </IconButton>
-              <IconButton>
-                <AttachFile />
-              </IconButton>
               <IconButton>
                 <MoreVert />
               </IconButton>
