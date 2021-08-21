@@ -27,7 +27,8 @@ export default function Sidebarchat({ convers, currentUser }) {
   }, [convers]);
 
   useEffect(() => {
-    const friendId = convers.members.find((m) => m !== currentUser._id);
+    const friendId = convers.members.find((m) => m !== currentUser?._id);
+    console.log(friendId);
     const getUser = async () => {
       try {
         const res = await axios(

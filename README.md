@@ -1,100 +1,70 @@
-# Hola
+# Getting Started with Create React App
 
----
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-# Team members
+## Available Scripts
 
-1-Abed kafaween
+In the project directory, you can run:
 
-2-deyaa al pozan
+### `npm start`
 
-3-Bushra Alja'fari
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-4-Qusai Tashtosh
+The page will reload if you make edits.\
+You will also see any lint errors in the console.
 
-# Cooperation Plan
+### `npm test`
 
-### What are the key strengths of each person on the team?
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-    abeddelrahman =postive
-    deyaa =perssitance
-    bushra= intellegnace
-    qusai= motivational
+### `npm run build`
 
-### How can you best utilize these strengths in the execution of your project?
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-    to split the tasks based on the strengths
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-### In which professional competencies do you each want to develop greater strength?
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-        we all want to develope our techniacl skills
+### `npm run eject`
 
-### Knowing that every person in your team needs to understand all aspects of the project, how do you plan to approach the day-to-day work?
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-introducation and share of idea first then we gonna slpit the tasks and in the end of the day discuss our work
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-# Conflict Plan
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-### What will be your group’s process to resolve conflict, when it arises?
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-    to discuss wich part the team meber was working in and see how to solve and not effect the data
+## Learn More
 
-### What will your team do if one person is taking over the project and not letting the other members contribute?
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-    if his thought are helfull we can take that otherwise we can handle him/her
+To learn React, check out the [React documentation](https://reactjs.org/).
 
-### How will you approach each other and the challenges of the project knowing that it is impossible for all members to be at the exact same place in understanding and skill level?
+### Code Splitting
 
-    its not about what our you will start its about to get the work done by the end of the day
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### How will you raise concerns to members who are not adequately contributing?
+### Analyzing the Bundle Size
 
-    to see what going on with him/her and try to help in a way
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### How and when will you escalate the conflict if your resolution attempts are unsuccessful?
+### Making a Progressive Web App
 
-    am gonna look it up and search for the solution
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-# Communication Plan
+### Advanced Configuration
 
-### How you will identify tasks, assign tasks, know when they are complete, and manage work in general?
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-    to every team member gonna work on his branch and when he/she done gonna push the work to the workflow branch in the end of the day we gonna merge it with main and solve the conflict
+### Deployment
 
-### What project management tool will be used?
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-    Trello
+### `npm run build` fails to minify
 
-# Git Process
-
-### What components of your project will live on GitHub?
-
-the front end and the back end
-
-### How will you share the repository with your teammates?
-
-    via git hub organizations
-
-### What is your Git flow?
-
-    mamber branch to work flow brance then main branch
-
-### Will you be using a PR review workflow? If so, consider:
-
-    yes
-
-### How many people must review a PR?
-
-only me abed kafaween
-
-### Who merges PRs?
-
-    me abed  kafaween
-
-### How often will you merge?
-
-    by the end of each day
-
-### How will you communicate that it’s time to merge?
-
-    via discord
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
