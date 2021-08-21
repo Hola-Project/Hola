@@ -1,27 +1,25 @@
-import React, { Component } from 'react';
+import React from 'react';
 import '../assets/Sidebar.css';
-import DonutLargeIcon from '@material-ui/icons/DonutLarge';
+
 import ChatIcon from '@material-ui/icons/Chat';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
+
 import { IconButton } from '@material-ui/core';
 import Avatar from 'react-avatar';
 import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
 import { useHistory } from 'react-router-dom';
 import Sidebarchat from '../components/Sidebarchat';
 import axios from 'axios';
-import { AttachFile, InsertEmoticon } from '@material-ui/icons';
+import { InsertEmoticon } from '@material-ui/icons';
 import MoreVert from '@material-ui/icons/MoreVert';
-import SearchOutlined from '@material-ui/icons/SearchOutlined';
+
 import '../assets/Chat.css';
 import Message from './message';
 import MicIcon from '@material-ui/icons/Mic';
 import { useState, useEffect, useRef } from 'react';
 import { io } from 'socket.io-client';
 import Sideright from './Sideright';
-import Picker from 'emoji-picker-react';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
 
 export default function Sidebar() {
   const socket = useRef();
@@ -41,7 +39,8 @@ export default function Sidebar() {
   // const [onlineUsers, setOnlineUsers] = useState([]);
 
   useEffect(() => {
-    socket.current = io('ws://localhost:9000');
+    socket.current = io('ws://hola-socket.herokuapp.com');
+
     socket.current.on('getMessage', (data) => {
       setArrivalMessage({
         sender: data.senderId,
@@ -68,7 +67,7 @@ export default function Sidebar() {
     const getconvers = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:8080/conv/${data_user._id}`
+          `${process.env.REACT_APP_SERVER_URL}/conv/${data_user._id}`
         );
         setconver(res.data);
       } catch (error) {
@@ -82,7 +81,7 @@ export default function Sidebar() {
     const getMessages = async () => {
       try {
         const res = await axios.get(
-          'http://localhost:8080/message/' + currentChat?._id
+          `${process.env.REACT_APP_SERVER_URL}/message/` + currentChat?._id
         );
         setMessages(res.data);
       } catch (err) {
@@ -112,7 +111,10 @@ export default function Sidebar() {
     });
 
     try {
-      const res = await axios.post('http://localhost:8080/send', message);
+      const res = await axios.post(
+        `${process.env.REACT_APP_SERVER_URL}/send`,
+        message
+      );
       setMessages([...messages, res.data]);
       setNewMessage('');
     } catch (err) {
@@ -127,7 +129,7 @@ export default function Sidebar() {
   const updateStatus = async (e) => {
     try {
       const res = await axios.put(
-        'http://localhost:8080/updateStatus/' + e?._id
+        `${process.env.REACT_APP_SERVER_URL}/updateStatus/` + e?._id
       );
       console.log(res);
     } catch (err) {
@@ -139,7 +141,7 @@ export default function Sidebar() {
       <div className='Sidebar'>
         <div className='Sidebar__header'>
           <Avatar
-            src={'http://localhost:8080/' + data_user.img}
+            src={`${process.env.REACT_APP_SERVER_URL}/` + data_user.img}
             round='100%'
             size='45px'
             name={data_user.username}

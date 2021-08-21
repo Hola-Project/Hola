@@ -9,7 +9,7 @@ export default function Register() {
   const email = useRef();
   const password = useRef();
   const passwordAgain = useRef();
-  const img = useRef();
+
   let history = useHistory();
   const formData = new FormData();
   const handleClick = async (e) => {
@@ -18,12 +18,14 @@ export default function Register() {
     if (passwordAgain.current.value !== password.current.value) {
       passwordAgain.current.setCustomValidity("Passwords don't match!");
     } else {
-      formData.append('img',e.target.img.files[0]);
-      formData.append('username',username.current.value);
-      formData.append('email',email.current.value);
-      formData.append('password',password.current.value);
-     
-      console.log(formData);
+      formData.append('img', e.target.img.files[0]);
+      formData.append('username', username.current.value);
+      formData.append('email', email.current.value);
+      formData.append('password', password.current.value);
+
+      console.log(
+        process.env.REACT_APP_SERVER_URL + '/conv/611c2e5bd845fb09aa05ba62'
+      );
       // const user = {
       //   username: username.current.value,
       //   email: email.current.value,
@@ -31,12 +33,12 @@ export default function Register() {
       //   img: e.target.img.files[0]
       // };
 
-      
-      
-
       try {
-       const data =  await axios.post('http://localhost:8080/register', formData);
-       console.log(data);
+        const data = await axios.post(
+          `${process.env.REACT_APP_SERVER_URL}/register`,
+          formData
+        );
+        console.log(data);
         history.push('/login');
       } catch (err) {
         console.log(err);
@@ -89,7 +91,7 @@ export default function Register() {
               type='password'
             />
 
-            <input  type='file' name='img' id="img" />
+            <input type='file' name='img' id='img' />
 
             <button className='loginButton' type='submit'>
               Sign Up

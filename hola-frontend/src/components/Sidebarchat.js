@@ -1,5 +1,5 @@
 import Avatar from 'react-avatar';
-import React, { Component } from 'react';
+import React from 'react';
 import '../assets/Sidebarchat.css';
 
 import axios from 'axios';
@@ -15,7 +15,7 @@ export default function Sidebarchat({ convers, currentUser }) {
     const getstatus = async () => {
       try {
         const res_status = await axios(
-          'http://localhost:8080/getUnReadMessage/' + convers._id
+          `${process.env.REACT_APP_SERVER_URL}/getUnReadMessage/` + convers._id
         );
         setstatus(res_status.data);
         console.log(res_status.data);
@@ -31,7 +31,7 @@ export default function Sidebarchat({ convers, currentUser }) {
     const getUser = async () => {
       try {
         const res = await axios(
-          'http://localhost:8080/getUsers?userId=' + friendId
+          `${process.env.REACT_APP_SERVER_URL}/getUsers?userId=` + friendId
         );
         setUser(res.data);
         console.log(convers);
@@ -43,14 +43,14 @@ export default function Sidebarchat({ convers, currentUser }) {
     getUser();
   }, [currentUser, convers]);
 
-  const url = 'http://localhost:8080/' + user?.img;
+  const url = `${process.env.REACT_APP_SERVER_URL}/` + user?.img;
   return (
     <div class='Sidebarchat'>
       <Avatar src={url} round='100%' size='45px' name={user?.username} />
       <div className='Sidebarchat__info'>
         <h2>{user?.username}</h2>
       </div>
-      {status[0]?.seen == false && status[0]?.sender != data_user._id && (
+      {status[0]?.seen === false && status[0]?.sender !== data_user._id && (
         <span class='badge'>{status.length}</span>
       )}
     </div>

@@ -1,16 +1,12 @@
 import React from 'react';
 import '../assets/sideright.css';
 
-import DonutLargeIcon from '@material-ui/icons/DonutLarge';
-import ChatIcon from '@material-ui/icons/Chat';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
 // import { Avatar, IconButton } from '@material-ui/core';
 import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
-import { useHistory } from 'react-router-dom';
-import Sidebarchat from '../components/Sidebarchat';
+
 import Avatar from 'react-avatar';
 // import '../assets/Sidebarchat.css';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 export default function Sideright({ currentId, setCurrentChat }) {
@@ -19,7 +15,9 @@ export default function Sideright({ currentId, setCurrentChat }) {
 
   useEffect(() => {
     const getFriends = async () => {
-      const res = await axios.get('http://localhost:8080/friends');
+      const res = await axios.get(
+        `${process.env.REACT_APP_SERVER_URL}/friends`
+      );
 
       setFriends(res.data);
     };
@@ -39,7 +37,10 @@ export default function Sideright({ currentId, setCurrentChat }) {
       receiverId: user._id,
     };
     try {
-      const res = await axios.post(`http://localhost:8080/addcon`, mem);
+      const res = await axios.post(
+        `${process.env.REACT_APP_SERVER_URL}/addcon`,
+        mem
+      );
       console.log('res', res);
       console.log('res');
       setCurrentChat(res.data);
@@ -75,7 +76,7 @@ export default function Sideright({ currentId, setCurrentChat }) {
         {filterUser.map((o) => (
           <div className='Sidebarchat' onClick={() => handleClick(o)}>
             <Avatar
-              src={'http://localhost:8080/' + o?.img}
+              src={`${process.env.REACT_APP_SERVER_URL}/` + o?.img}
               round='100%'
               size='45px'
               name={o?.username}
