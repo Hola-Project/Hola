@@ -24,7 +24,7 @@ export default function Sidebarchat({ convers, currentUser }) {
       }
     };
     getstatus();
-  }, []);
+  }, [convers]);
 
   useEffect(() => {
     const friendId = convers.members.find((m) => m !== currentUser._id);
